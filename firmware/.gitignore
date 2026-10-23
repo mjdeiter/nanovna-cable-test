@@ -1,0 +1,10 @@
+build/
+managed_components/
+sdkconfig
+sdkconfig.*
+!sdkconfig.defaults
+.pio/
+test/host/test_vna_core
+test/host/test_fbtext
+test/host/test_vna_test
+test/host/*.dSYM

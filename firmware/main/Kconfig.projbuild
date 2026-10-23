@@ -1,0 +1,81 @@
+menu "NanoVNA cable tester"
+
+    config NANOVNA_USB_VID
+        hex "NanoVNA USB vendor ID"
+        default 0x0483
+        help
+            0x0483:0x5740 is the STM32 virtual COM port used by NanoVNA-H and H4.
+
+    config NANOVNA_USB_PID
+        hex "NanoVNA USB product ID"
+        default 0x5740
+
+    config NANOVNA_MAX_VSWR_X100
+        int "VSWR limit at 1.0 GHz, times 100"
+        default 160
+        range 100 1000
+        help
+            160 means VSWR <= 1.60:1 (about 12.7 dB return loss).
+
+    config NANOVNA_MAX_LOSS_X100
+        int "Insertion loss limit at 1.0 GHz in dB, times 100"
+        default 58
+        range 0 1000
+        help
+            58 means 0.58 dB. The right limit depends on cable type and assembly length.
+
+    config NANOVNA_SETTLE_MS
+        int "Wait after setting the sweep range (ms)"
+        default 600
+        range 100 5000
+
+    config NANOVNA_SKIP_CAL_CHECK
+        bool "Do not verify that the NanoVNA is calibrated"
+        default n
+        help
+            Results are then marked "cal check skipped".
+
+    config NANOVNA_BUTTON_GPIO
+        int "GPIO of the test button (active low)"
+        default 0
+        range 0 48
+        help
+            GPIO0 is the BOOT button on most ESP32-S3 boards.
+
+    config NANOVNA_DISPLAY_TDISPLAY_S3
+        bool "Show results on a LilyGO T-Display-S3 (ST7789, 8-bit parallel)"
+        default y
+
+    config NANOVNA_LCD_INVERT_COLORS
+        bool "Invert display colors"
+        depends on NANOVNA_DISPLAY_TDISPLAY_S3
+        default y
+
+    config NANOVNA_LCD_SWAP_XY
+        bool "Landscape (swap X and Y)"
+        depends on NANOVNA_DISPLAY_TDISPLAY_S3
+        default y
+
+    config NANOVNA_LCD_MIRROR_X
+        bool "Mirror X"
+        depends on NANOVNA_DISPLAY_TDISPLAY_S3
+        default n
+
+    config NANOVNA_LCD_MIRROR_Y
+        bool "Mirror Y"
+        depends on NANOVNA_DISPLAY_TDISPLAY_S3
+        default y
+
+    config NANOVNA_LCD_GAP_X
+        int "Panel column offset"
+        depends on NANOVNA_DISPLAY_TDISPLAY_S3
+        default 0
+
+    config NANOVNA_LCD_GAP_Y
+        int "Panel row offset"
+        depends on NANOVNA_DISPLAY_TDISPLAY_S3
+        default 35
+        help
+            The 170 px wide panel sits in the middle of the ST7789's 240 px RAM, hence 35.
+
+endmenu
