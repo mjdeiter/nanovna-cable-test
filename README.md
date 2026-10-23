@@ -9,7 +9,7 @@ The original write-up (spec, scripts, flash command) is kept in [docs/NanoVNA_Ca
 | Part | State |
 | --- | --- |
 | `test_lmr240.py` | Working draft, hardened after review. Tested against simulated NanoVNA output only; **not yet run on real hardware.** |
-| `firmware/main.cpp` | **Non-functional prototype, do not use for QC.** The parser is a stub with hard-coded results (VSWR 1.35, loss 0.42), so it shows PASS for every cable. The USB host calls also look modelled on Teensy's USBHost_t36 rather than an ESP32 API, so it likely won't compile. |
+| `firmware/` | ESP-IDF project for an ESP32-S3 acting as USB host, with results on a T-Display-S3 screen. Replaces the original Arduino sketch (a stub that showed PASS for every cable). Builds with ESP-IDF 5.5 and its logic is unit-tested on a host, but it has **not yet run on real hardware**. See [firmware/README.md](firmware/README.md). |
 
 ## Setup
 
